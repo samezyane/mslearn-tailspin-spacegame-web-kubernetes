@@ -63,10 +63,12 @@ stages:
             displayName: Create imagePullSecret
             inputs:
               action: createSecret
-              connectionType: azureResourceManager
+              connectionType: kubernetesServiceConnection
+              kubernetesServiceConnection: 'Kubernetes Cluster Connection'
               secretName: $(imagePullSecret)
+              secretType: dockerRegistry
               dockerRegistryEndpoint: 'Container Registry Connection'
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              # azureSubscriptionConnection: 'Kubernetes Cluster Connection' // required when connectionType == azureResourceManager
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
               namespace: 'default'
@@ -74,8 +76,8 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
-              connectionType: azureResourceManager
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              connectionType: kubernetesServiceConnection
+              kubernetesServiceConnection: 'Kubernetes Cluster Connection'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
               namespace: 'default'

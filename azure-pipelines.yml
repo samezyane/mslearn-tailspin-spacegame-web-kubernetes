@@ -24,7 +24,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: $(ContainerRegistryConnection)
+        containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
 
@@ -35,7 +35,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(leaderboardRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
-        containerRegistry: $(ContainerRegistryConnection)
+        containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
 
@@ -65,8 +65,8 @@ stages:
               action: createSecret
               connectionType: azureResourceManager
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(ContainerRegistryConnection)
-              azureSubscriptionConnection: $(KubernetesClusterConnection)
+              dockerRegistryEndpoint: 'Container Registry Connection'
+              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
               namespace: 'default'
@@ -75,7 +75,7 @@ stages:
             inputs:
               action: deploy
               connectionType: azureResourceManager
-              azureSubscriptionConnection: $(KubernetesClusterConnection)
+              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
               namespace: 'default'

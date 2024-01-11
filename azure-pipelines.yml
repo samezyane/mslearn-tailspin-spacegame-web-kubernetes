@@ -59,6 +59,10 @@ stages:
           steps:
           - download: current
             artifact: manifests
+          # Delay further execution of a workflow by a fixed time.
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '1' # string. Required. Delay Time (minutes). Default: 0.
           - task: KubernetesManifest@1
             displayName: Create imagePullSecret
             inputs:

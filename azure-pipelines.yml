@@ -59,7 +59,6 @@ stages:
           steps:
           - download: current
             artifact: manifests
-          - script: Start-Sleep -Seconds 10
           - task: KubernetesManifest@1
             displayName: Create imagePullSecret
             inputs:

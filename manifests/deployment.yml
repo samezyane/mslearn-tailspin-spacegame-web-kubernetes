@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: '$(RegistryName)/web'
+          image: 'tailspinspacegame1817.azurecr.io/web'
           ports:
           - containerPort: 80
 ---
@@ -34,6 +34,6 @@ spec:
     spec:
       containers:
         - name: leaderboard
-          image: '$(RegistryName)/leaderboard'
+          image: 'tailspinspacegame1817.azurecr.io/leaderboard'
           ports:
           - containerPort: 80

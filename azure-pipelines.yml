@@ -68,7 +68,7 @@ stages:
               secretName: $(imagePullSecret)
               secretType: dockerRegistry
               dockerRegistryEndpoint: 'Container Registry Connection'
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              azureSubscriptionConnection: 'Kubernetes Connection'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
               namespace: 'default'
@@ -77,7 +77,7 @@ stages:
             inputs:
               action: deploy
               connectionType: azureResourceManager
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              azureSubscriptionConnection: 'Kubernetes Connection'
               rolloutStatusTimeout: '1050'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)

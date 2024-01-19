@@ -3,6 +3,7 @@ trigger:
 
 variables:
   buildConfiguration: 'Release'
+  group: 'Release'
   leaderboardRepository: 'leaderboard'
   webRepository: 'web'
   tag: '$(Build.BuildId)'
@@ -59,16 +60,15 @@ stages:
           steps:
           - download: current
             artifact: manifests
-          - script: Start-Sleep -Seconds 10
           - task: KubernetesManifest@1
             displayName: Create imagePullSecret
             inputs:
               action: createSecret
-              connectionType: azureResourceManager
+              connectionType: kubernetesServiceConnection
               secretName: $(imagePullSecret)
               secretType: dockerRegistry
               dockerRegistryEndpoint: 'Container Registry Connection'
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              kubernetesServiceConnection: 'Kubernetes Connection'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
               namespace: 'default'
@@ -76,8 +76,8 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
-              connectionType: azureResourceManager
-              azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+              connectionType: kubernetesServiceConnection
+              kubernetesServiceConnection: 'Kubernetes Connection'
               rolloutStatusTimeout: '1050'
               azureResourceGroup: $(rgName)
               kubernetesCluster: $(aksName)
